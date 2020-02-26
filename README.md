@@ -5,7 +5,7 @@ ElasticsearchBundle provides convenient classes, services and command to integra
 Install the package with:
 
 ```console
-composer require faibl/elasticsearch-bundel
+composer require faibl/elasticsearch-bundle
 ```
 
 And... that's it! If you're *not* using Symfony Flex, you'll also
