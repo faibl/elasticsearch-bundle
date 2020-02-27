@@ -6,14 +6,30 @@
 
     <services>
         <service id="Faibl\ElasticsearchBundle\Search\Manager\SearchClient" public="false">
-            <argument type="service" id="monolog.logger"/>
         </service>
+
         <service id="Faibl\ElasticsearchBundle\Search\Manager\SearchManager" public="false">
             <argument type="service" id="Faibl\ElasticsearchBundle\Search\Manager\SearchClient"/>
         </service>
+
+        <service id="Faibl\ElasticsearchBundle\Services\SearchService" public="false">
+            <argument type="service" id="Faibl\ElasticsearchBundle\Search\Manager\SearchManager"/>
+        </service>
+
+        <service id="Faibl\ElasticsearchBundle\Repository\SearchRepository" public="false">
+            <argument type="service" id="Faibl\ElasticsearchBundle\Services\SearchService"/>
+        </service>
+
         <service id="Faibl\ElasticsearchBundle\Command\SearchSetupCommand" public="false">
             <argument type="service" id="Faibl\ElasticsearchBundle\Search\Manager\SearchManager"/>
             <tag name="console.command" />
         </service>
+
+        <service id="Faibl\ElasticsearchBundle\Command\SearchIndexCommand" public="false">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="Faibl\ElasticsearchBundle\Services\SearchService"/>
+            <tag name="console.command" />
+        </service>
+
     </services>
 </container>

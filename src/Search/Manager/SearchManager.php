@@ -2,6 +2,8 @@
 
 namespace Faibl\ElasticsearchBundle\Search\Manager;
 
+use Faibl\ElasticsearchBundle\Services\SearchService;
+
 class SearchManager
 {
     private $client;
