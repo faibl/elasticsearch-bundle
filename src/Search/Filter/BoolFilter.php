@@ -6,7 +6,7 @@ class BoolFilter implements FilterInterface
 {
     private $filter = [];
     private $should = [];
-    private $minimumShouldMatch = 1;
+    private $minimumShouldMatch = 0;
 
     public function hasFilter(): bool
     {
