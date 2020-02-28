@@ -14,12 +14,12 @@ class SearchRepository
         $this->searchService = $searchService;
     }
 
-    public function findForId(int $id, $hydrateMode): array
+    public function findForId(int $id, $hydrateMode = SearchService::HYDRATE_RESULT): array
     {
         return $this->searchService->get($id, $hydrateMode);
     }
 
-    public function findForQuery(QueryInterface $query, string $hydrateMode): array
+    public function findForQuery(QueryInterface $query, string $hydrateMode = SearchService::HYDRATE_RESULT): array
     {
         return $this->searchService->find($query->getQuery(), $hydrateMode);
     }
