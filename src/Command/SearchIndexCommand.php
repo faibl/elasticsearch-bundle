@@ -70,7 +70,7 @@ class SearchIndexCommand extends Command
             $entities[] = $row[0];
             if (($count % $batchSize) === 0) {
                 $this->searchService->indexBulk($entities);
-                $this->io->text(sprintf('Documents added: %d. Memory: %s', $count, $this->getMemory()));
+                $this->io->text(sprintf('Documents added: %d. Memory: %s', $count, $this->getMemoryUsage()));
                 $entities = [];
                 gc_collect_cycles();
                 $this->em->clear();
