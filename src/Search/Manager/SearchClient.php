@@ -86,13 +86,12 @@ class SearchClient
 
     private function callClient(string $method, array $params = []): array
     {
-        $result = call_user_func([$this->client, $method], $params);
-//        try {
-//            $result = call_user_func([$this->client, $method], $params);
-//        } catch (\Exception $e) {
-//            $this->logger->addError(sprintf('Search:%s errors with message %s', ucfirst($method), $e->getMessage()));
-//            $result = ['method' => $e->getMessage()];
-//        }
+        try {
+            $result = call_user_func([$this->client, $method], $params);
+        } catch (\Exception $e) {
+            $this->logger->addError(sprintf('Search:%s errors with message %s', ucfirst($method), $e->getMessage()));
+            $result = ['method' => $e->getMessage()];
+        }
 
         return $result;
     }
