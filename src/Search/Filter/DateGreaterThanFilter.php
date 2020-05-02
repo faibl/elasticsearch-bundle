@@ -2,10 +2,10 @@
 
 namespace Faibl\ElasticsearchBundle\Search\Filter;
 
-use Faibl\ElasticsearchBundle\Spec;
-
 class DateGreaterThanFilter implements FilterInterface
 {
+    public const DATE_FORMAT = 'Y-m-d';
+
     private $key;
     private $dateTime;
 
@@ -25,7 +25,7 @@ class DateGreaterThanFilter implements FilterInterface
         return [
             'range' => [
                 $this->key => [
-                    'gte' => $this->dateTime->format(Spec::DATE_FORMAT),
+                    'gte' => $this->dateTime->format(self::DATE_FORMAT),
                 ]
             ],
         ];

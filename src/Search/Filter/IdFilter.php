@@ -2,8 +2,6 @@
 
 namespace Faibl\ElasticsearchBundle\Search\Filter;
 
-use Faibl\ElasticsearchBundle\Spec;
-
 class IdFilter implements FilterInterface
 {
     private $id;
