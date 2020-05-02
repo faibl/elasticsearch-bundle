@@ -55,7 +55,7 @@ class SearchManager
             'type' => $this->getDocumentType(),
             'id' => $id,
             'body' => $body,
-            'refresh' => true,
+            'refresh' => 'wait_for',
         ];
 
         return $this->client->indexSingle($params);
