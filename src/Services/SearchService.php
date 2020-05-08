@@ -2,8 +2,8 @@
 
 namespace Faibl\ElasticsearchBundle\Services;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Faibl\ElasticsearchBundle\Search\Manager\SearchManager;
+use Faibl\ElasticsearchBundle\Util\ArrayUtil;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class SearchService
@@ -43,7 +43,7 @@ class SearchService
         return $this->searchManager->indexSingle($document->getId(), $this->getDocumentBody($document));
     }
 
-    public function removSingle(int $id): array
+    public function removeSingle(int $id): array
     {
         return $this->searchManager->delete($id);
     }
@@ -100,13 +100,15 @@ class SearchService
 
     private function hydrateToObjects(array $searchResult): array
     {
-        return array_map(function (array $item) {
+        $documents = array_map(function (array $item) {
             $id = (int) $item['_id'];
             $source = $item['_source'];
             $data = array_merge(['id' => $id], $source);
 
             return $this->serializer->deserialize(json_encode($data), $this->className, 'json');
         }, $searchResult['hits']);
+
+        return ArrayUtil::filterEmpty($documents);
     }
 
     private function hydrateToSource(array $searchResult): array
