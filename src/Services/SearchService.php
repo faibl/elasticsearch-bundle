@@ -38,9 +38,9 @@ class SearchService
         return $this->hydrate($searchResult, $hydrateMode);
     }
 
-    public function indexSingle($document): array
+    public function indexSingle($document, array $options = []): array
     {
-        return $this->searchManager->indexSingle($document->getId(), $this->getDocumentBody($document));
+        return $this->searchManager->indexSingle($document->getId(), $this->getDocumentBody($document), $options);
     }
 
     public function removeSingle(int $id): array
