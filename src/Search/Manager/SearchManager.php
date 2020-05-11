@@ -48,14 +48,14 @@ class SearchManager
         return $this->client->delete($params);
     }
 
-    public function indexSingle(int $id, array $body): array
+    public function indexSingle(int $id, array $body, array $options = []): array
     {
         $params = [
             'index' => $this->getIndexName(),
             'type' => $this->getDocumentType(),
             'id' => $id,
             'body' => $body,
-            'refresh' => 'wait_for',
+            'refresh' => $options['refresh'] ?? false,
         ];
 
         return $this->client->indexSingle($params);
