@@ -15,7 +15,7 @@ class BoolTermFilter implements FilterInterface
 
     public function hasFilter(): bool
     {
-        return !empty($this->value);
+        return !is_null($this->value);
     }
 
     public function getFilter(): array
