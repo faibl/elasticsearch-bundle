@@ -5,12 +5,14 @@ namespace Faibl\ElasticsearchBundle\Search\Filter;
 class BoolFilter implements FilterInterface
 {
     private $filter = [];
+    private $must = [];
+    private $mustNot = [];
     private $should = [];
     private $minimumShouldMatch = 0;
 
     public function hasFilter(): bool
     {
-        return !empty($this->filter) || !empty($this->should);
+        return !empty($this->filter) || !empty($this->must) || !empty($this->mustNot) || !empty($this->should);
     }
 
     public function getFilter(): array
@@ -37,6 +39,44 @@ class BoolFilter implements FilterInterface
     {
         if ($filter->hasFilter()) {
             $this->filter[] = $filter->getFilter();
+        }
+
+        return $this;
+    }
+
+    public function addMusts(array $filters): self
+    {
+        foreach ($filters as $filter) {
+            $this->addMust($filter);
+        }
+
+        return $this;
+    }
+
+
+    public function addMust(FilterInterface $filter): self
+    {
+        if ($filter->hasFilter()) {
+            $this->must[] = $filter->getFilter();
+        }
+
+        return $this;
+    }
+
+    public function addMustNots(array $filters): self
+    {
+        foreach ($filters as $filter) {
+            $this->addMustNot($filter);
+        }
+
+        return $this;
+    }
+
+
+    public function addMustNot(FilterInterface $filter): self
+    {
+        if ($filter->hasFilter()) {
+            $this->mustNot[] = $filter->getFilter();
         }
 
         return $this;
