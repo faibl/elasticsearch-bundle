@@ -21,6 +21,8 @@ class BoolFilter implements FilterInterface
             'bool' => [
                 'filter' => $this->filter, // real filter, no effect on score
                 'should' => $this->should, // used for or clauses
+                'must' => $this->must, // effect on score
+                'must_not' => $this->mustNot,
                 'minimum_should_match' => $this->minimumShouldMatch,
             ],
         ];
