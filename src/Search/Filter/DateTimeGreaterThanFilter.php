@@ -6,9 +6,9 @@ class DateTimeGreaterThanFilter implements FilterInterface
 {
     public const DATE_FORMAT = 'Y-m-d H:i:s';
 
-    private $key;
-    private $dateTime;
-    private $format;
+    protected $key;
+    protected $dateTime;
+    protected $format;
 
     public function __construct(string $key, ?\DateTimeInterface $dateTime, string $format = self::DATE_FORMAT)
     {
