@@ -28,6 +28,7 @@ class SearchManager
         $params = [
             'index' => $this->getIndexName(),
             'body' => $queryParams,
+            'track_total_hits' => true,
         ];
 
         return $this->client->search($params);

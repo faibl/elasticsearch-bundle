@@ -39,6 +39,6 @@ class CustomFieldValueSort implements SortInterface
 
     private function getScript(): string
     {
-        return sprintf("if(params.scores.containsKey(doc['%s'].value)) { return params.scores[doc['%s'].value];} return 0;", $this->field, $this->field);
+        return sprintf("if(params.scores.containsKey(doc['%s'])) { return params.scores[doc['%s']];} return 0;", $this->field, $this->field);
     }
 }

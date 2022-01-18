@@ -126,7 +126,7 @@ class SearchService
         switch (true) {
             case isset($searchResult['hits']):
                 $hits = $searchResult['hits']['hits'];
-                $total = $searchResult['hits']['total'] ?? count($hits);
+                $total = $searchResult['hits']['total']['value'] ?? count($hits);
                 break;
             case isset($searchResult['found']):
                 $hits = [$searchResult];
@@ -138,7 +138,10 @@ class SearchService
         }
 
         return [
-            'total' => $total,
+            'total' => [
+                'value' => $total,
+                'relation' => 'eq',
+            ],
             'hits' => $hits,
         ];
     }
