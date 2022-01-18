@@ -2,8 +2,6 @@
 
 namespace Faibl\ElasticsearchBundle\Search\Manager;
 
-use Faibl\ElasticsearchBundle\Services\SearchService;
-
 class SearchManager
 {
     private $client;
@@ -19,7 +17,6 @@ class SearchManager
     {
         $params = [
             'index' => $this->getIndexName(),
-            'type' => $this->getDocumentType(),
             'id' => $id,
         ];
 
@@ -30,7 +27,6 @@ class SearchManager
     {
         $params = [
             'index' => $this->getIndexName(),
-            'type' => $this->getDocumentType(),
             'body' => $queryParams,
         ];
 
@@ -41,7 +37,6 @@ class SearchManager
     {
         $params = [
             'index' => $this->getIndexName(),
-            'type' => $this->getDocumentType(),
             'id' => $id,
         ];
 
@@ -52,7 +47,6 @@ class SearchManager
     {
         $params = [
             'index' => $this->getIndexName(),
-            'type' => $this->getDocumentType(),
             'id' => $id,
             'body' => $body,
             'refresh' => $options['refresh'] ?? false,
@@ -69,7 +63,6 @@ class SearchManager
             $params['body'][] = [
                 'index' => [
                     '_index' => $this->getIndexName(),
-                    '_type' => $this->getDocumentType(),
                     '_id' => $id,
                 ],
             ];
@@ -134,7 +127,6 @@ class SearchManager
     {
         $params = [
             'index' => $this->getIndexName(),
-            'type' => $this->getDocumentType(),
             'body' => $this->getMapping(),
         ];
 
@@ -149,11 +141,6 @@ class SearchManager
     public function getIndexName(): string
     {
         return $this->config['index_name'];
-    }
-
-    private function getDocumentType(): string
-    {
-        return $this->config['document_type'];
     }
 
     private function getSettings(): array
