@@ -24,7 +24,6 @@ faibl_elasticsearch:
     logger: 'monolog.logger'
     elasticsearch:
         index_name: "%elasticsearch_index_name%"
-        document_type: yourentity
         settings:
             number_of_shards: 1
             number_of_replicas: 0
