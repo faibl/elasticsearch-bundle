@@ -2,7 +2,6 @@
     "name": "faibl/elasticsearch-bundle",
     "description": "Symfony bundle for php-elasticsearch integration",
     "type": "symfony-bundle",
-    "version": "1.0",
     "license": "MIT",
     "authors": [
         {
