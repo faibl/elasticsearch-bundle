@@ -49,7 +49,7 @@ class SearchIndexCommand extends Command
         }
         $this->io->success('done');
 
-        return 1;
+        return 0;
     }
 
     private function addSingleDocument(int $id): void
