@@ -48,6 +48,8 @@ class SearchIndexCommand extends Command
             $this->addSingleDocument((int) $option);
         }
         $this->io->success('done');
+
+        return 1;
     }
 
     private function addSingleDocument(int $id): void
