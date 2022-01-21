@@ -57,6 +57,8 @@ class SearchSetupCommand extends Command
             $this->deleteIndex();
         }
         $this->io->success('done');
+
+        return 1;
     }
 
     private function createIndex(): void
