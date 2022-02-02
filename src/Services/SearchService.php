@@ -81,7 +81,7 @@ class SearchService
         $items = $this->hydrateToSource($searchResult);
 
         return [
-            'total' => $searchResult['total'],
+            'total' => $searchResult['total']['value'],
             'count' => count($items),
             'items' => $items,
         ];
@@ -92,7 +92,7 @@ class SearchService
         $items = $this->hydrateToObjects($searchResult);
 
         return [
-            'total' => $searchResult['total'],
+            'total' => $searchResult['total']['value'],
             'count' => count($items),
             'items' => $items,
         ];
