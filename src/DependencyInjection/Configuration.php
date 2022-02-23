@@ -23,8 +23,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->scalarNode('logger')
-                ->end()
                 ->arrayNode('elasticsearch')
                     ->children()
                         ->scalarNode('index_name')

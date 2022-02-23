@@ -2,17 +2,14 @@
 
 namespace Faibl\ElasticsearchBundle\Search\Manager;
 
-use Monolog\Logger;
 use Elasticsearch\ClientBuilder;
 
 class SearchClient
 {
-    private $logger;
     private $client;
 
-    public function __construct(Logger $logger)
+    public function __construct()
     {
-        $this->logger = $logger;
         $this->client = ClientBuilder::create()->build();
     }
 
@@ -86,37 +83,16 @@ class SearchClient
 
     private function callClient(string $method, array $params = []): array
     {
-        try {
-            $result = call_user_func([$this->client, $method], $params);
-        } catch (\Exception $e) {
-            $this->logger->addError(sprintf('Search:%s errors with message %s', ucfirst($method), $e->getMessage()));
-            $result = ['method' => $e->getMessage()];
-        }
-
-        return $result;
+        return call_user_func([$this->client, $method], $params);
     }
 
     private function callClientIndices(string $method, array $params = []): array
     {
-        try {
-            $result = call_user_func([$this->client->indices(), $method], $params);
-        } catch (\Exception $e) {
-            $this->logger->addError(sprintf('Search:Indices:%s errors with message %s', ucfirst($method), $e->getMessage()));
-            $result = ['method' => $e->getMessage()];
-        }
-
-        return $result;
+        return call_user_func([$this->client->indices(), $method], $params);
     }
 
     private function callClientCluster(string $method, array $params = []): array
     {
-        try {
-            $result = call_user_func([$this->client->cluster(), $method], $params);
-        } catch (\Exception $e) {
-            $this->logger->addError(sprintf('Search:Cluster:%s errors with message %s', ucfirst($method), $e->getMessage()));
-            $result = ['method' => $e->getMessage()];
-        }
-
-        return $result;
+        return call_user_func([$this->client->cluster(), $method], $params);
     }
 }

@@ -18,9 +18,6 @@ class FaiblElasticsearchExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $definition = $container->getDefinition('Faibl\ElasticsearchBundle\Search\Manager\SearchClient');
-        $definition->setArgument(0, new Reference($config['logger']));
-
         $definition = $container->getDefinition('Faibl\ElasticsearchBundle\Search\Manager\SearchManager');
         $definition->setArgument(1, $config['elasticsearch']);
 
