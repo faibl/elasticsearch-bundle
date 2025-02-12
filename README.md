@@ -132,6 +132,11 @@ class OnlineAtFilter implements FilterInterface
 }
 ```
 
+## Run Tests
+```
+php vendor/bin/simple-phpunit
+```
+
 ### Todo
 * Write tests..
 * Extend filters/queries

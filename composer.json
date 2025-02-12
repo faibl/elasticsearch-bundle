@@ -10,11 +10,17 @@
         }
     ],
     "require": {
-        "php": ">7.1",
-        "elasticsearch/elasticsearch": "^7.16"
+        "php": ">=8.1",
+        "elasticsearch/elasticsearch": "^7.16",
+        "symfony/console": "^7.2",
+      "ext-json": "*",
+        "symfony/flex": "^2.4",
+        "symfony/framework-bundle": "^7.2",
+        "doctrine/orm": "^3.3",
+        "symfony/dotenv": "^7.2"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^5.1"
+        "symfony/phpunit-bridge": "^7.2"
     },
     "autoload": {
         "psr-4": {
@@ -24,6 +30,17 @@
     "autoload-dev": {
         "psr-4": {
             "Faibl\\ElasticsearchBundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         }
     }
 }

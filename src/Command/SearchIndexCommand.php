@@ -4,21 +4,24 @@ namespace Faibl\ElasticsearchBundle\Command;
 
 use Faibl\ElasticsearchBundle\Services\SearchService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+    name: 'fbl:elasticsearch:index',
+    description: 'Elasticsearch indexing operations',
+    hidden: false
+)]
 class SearchIndexCommand extends Command
 {
-    protected static $defaultName = 'fbl:elasticsearch:index';
-
-    private $em;
-    private $className;
-    private $searchService;
-    /** @var SymfonyStyle */
-    private $io;
+    private EntityManagerInterface $em;
+    private SearchService $searchService;
+    private string $className;
+    private ?SymfonyStyle $io = null;
 
     public function __construct(EntityManagerInterface $em, SearchService $searchService, string $className)
     {
@@ -27,18 +30,17 @@ class SearchIndexCommand extends Command
         $this->className = $className;
         $this->searchService = $searchService;
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
-        parent::__construct(self::$defaultName);
+        parent::__construct();
     }
 
     protected function configure()
     {
         $this
-            ->setDescription('Elasticsearch indexing operations')
             ->addOption('all', null, InputOption::VALUE_NONE)
             ->addOption('id', null, InputOption::VALUE_REQUIRED);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io = new SymfonyStyle($input, $output);
         if ($input->getOption('all')) {
@@ -49,7 +51,7 @@ class SearchIndexCommand extends Command
         }
         $this->io->success('done');
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     private function addSingleDocument(int $id): void

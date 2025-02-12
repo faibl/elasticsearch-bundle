@@ -7,11 +7,9 @@ use Faibl\ElasticsearchBundle\Services\SearchService;
 
 class SearchRepository
 {
-    private $searchService;
-
-    public function __construct(SearchService $searchService)
-    {
-        $this->searchService = $searchService;
+    public function __construct(
+        private readonly SearchService $searchService
+    ) {
     }
 
     public function findForId(int $id, $hydrateMode = SearchService::HYDRATE_RESULT): array

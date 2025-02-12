@@ -2,6 +2,7 @@
 
 namespace Faibl\ElasticsearchBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -9,27 +10,26 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Faibl\ElasticsearchBundle\Search\Manager\SearchManager;
 
+#[AsCommand(
+    name: 'fbl:elasticsearch:setup',
+    description: 'Elasticsearch index management operations',
+    hidden: false
+)]
 class SearchSetupCommand extends Command
 {
-    protected static $defaultName = 'fbl:elasticsearch:setup';
+    private SearchManager $searchManager;
+    private ?SymfonyStyle $io = null;
 
-    private $searchManager;
-
-    /**
-     * @var SymfonyStyle
-     */
-    private $io;
-
-    public function __construct(SearchManager $searchManager)
-    {
+    public function __construct(
+        SearchManager $searchManager
+    ) {
         $this->searchManager = $searchManager;
-        parent::__construct(self::$defaultName);
+        parent::__construct();
     }
 
     protected function configure()
     {
         $this
-            ->setDescription('Elasticsearch index management operations')
             ->addOption('create', null, InputOption::VALUE_NONE)
             ->addOption('recreate', null, InputOption::VALUE_NONE)
             ->addOption('update-mapping', null, InputOption::VALUE_NONE)
@@ -37,7 +37,7 @@ class SearchSetupCommand extends Command
             ->addOption('delete', null, InputOption::VALUE_NONE);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io = new SymfonyStyle($input, $output);
         if ($input->getOption('create')) {
@@ -58,7 +58,7 @@ class SearchSetupCommand extends Command
         }
         $this->io->success('done');
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     private function createIndex(): void
