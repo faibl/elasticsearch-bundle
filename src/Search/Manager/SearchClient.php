@@ -2,11 +2,12 @@
 
 namespace Faibl\ElasticsearchBundle\Search\Manager;
 
+use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 
 class SearchClient
 {
-    private $client;
+    private Client $client;
 
     public function __construct()
     {

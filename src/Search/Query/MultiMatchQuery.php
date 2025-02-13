@@ -4,16 +4,14 @@ namespace Faibl\ElasticsearchBundle\Search\Query;
 
 class MultiMatchQuery implements QueryInterface
 {
-    private $phrase;
-    private $fields = [];
-    private $operator = 'and';
-    private $type = 'cross_fields';
-    private $analyzer = 'standard';
+    private string $operator = 'and';
+    private string $type = 'cross_fields';
+    private string $analyzer = 'standard';
 
-    public function __construct(array $fields, string $phrase)
-    {
-        $this->phrase = $phrase;
-        $this->fields = $fields;
+    public function __construct(
+        private array $fields,
+        private string $phrase
+    ) {
     }
 
     public function getQuery(): array

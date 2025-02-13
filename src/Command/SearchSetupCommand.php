@@ -27,7 +27,7 @@ class SearchSetupCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->addOption('create', null, InputOption::VALUE_NONE)

@@ -4,13 +4,10 @@ namespace Faibl\ElasticsearchBundle\Search\Sort;
 
 class FieldSort implements SortInterface
 {
-    private $field;
-    private $direction;
-
-    public function __construct(string $field, string $direction = 'asc')
-    {
-        $this->field = $field;
-        $this->direction = $direction;
+    public function __construct(
+        private readonly string $field,
+        private readonly string $direction = 'asc'
+    ) {
     }
 
     public function hasSort(): bool

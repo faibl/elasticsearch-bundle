@@ -3,14 +3,14 @@
 namespace Faibl\ElasticsearchBundle\Search\Query;
 
 use Faibl\ElasticsearchBundle\Search\Sort\SortInterface;
-use App\Util\ArrayUtil;
+use Faibl\ElasticsearchBundle\Util\ArrayUtil;
 
 class Query implements QueryInterface
 {
-    private $query = [];
-    private $sort = [];
-    private $from = 0;
-    private $size = 20;
+    private array $query = [];
+    private array $sort = [];
+    private int $from = 0;
+    private int $size = 20;
 
     public function getQuery(): array
     {

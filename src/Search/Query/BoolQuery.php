@@ -6,11 +6,11 @@ use Faibl\ElasticsearchBundle\Search\Filter\FilterInterface;
 
 class BoolQuery implements QueryInterface
 {
-    private $filter = [];
-    private $must = [];
-    private $should = [];
-    private $mustNot = [];
-    private $minimumShouldMatch = 0; // defines how many terms defined in should must be present. To create or query, set to 1
+    private array $filter = [];
+    private array $must = [];
+    private array $should = [];
+    private array $mustNot = [];
+    private int $minimumShouldMatch = 0; // defines how many terms defined in should must be present. To create or query, set to 1
 
     public function getQuery(): array
     {

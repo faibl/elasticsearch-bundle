@@ -4,8 +4,8 @@ namespace Faibl\ElasticsearchBundle\Search\Manager;
 
 class SearchManager
 {
-    private $client;
-    private $config;
+    private SearchClient $client;
+    private array $config;
 
     public function __construct(SearchClient $searchClient, array $config)
     {

@@ -4,9 +4,9 @@ namespace Faibl\ElasticsearchBundle\Search\Query;
 
 class MatchQuery implements QueryInterface
 {
-    private $field;
-    private $value;
-    private $zeroTermsQuery;
+    private string $field;
+    private string $value;
+    private bool $zeroTermsQuery;
 
     public function __construct(string $field, string $value, bool $zeroTermsQuery = true)
     {

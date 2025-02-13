@@ -4,15 +4,11 @@ namespace Faibl\ElasticsearchBundle\Search\Sort;
 
 class CustomFieldValueSort implements SortInterface
 {
-    private $field;
-    private $scores;
-    private $order;
-
-    public function __construct(string $field,  array $scores, string $order = 'desc')
-    {
-        $this->field = $field;
-        $this->scores = $scores;
-        $this->order = $order;
+    public function __construct(
+        private readonly string $field,
+        private readonly array $scores,
+        private readonly string $order = 'desc'
+    ) {
     }
 
     public function hasSort(): bool

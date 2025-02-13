@@ -13,15 +13,11 @@ class SearchService
     public const HYDRATE_OBJECT = 'hydrate_object';
     public const HYDRATE_RESULT = 'hydrate_result';
 
-    private $searchManager;
-    private $serializer;
-    private $className;
-
-    public function __construct(SearchManager $searchManager, SerializerInterface $serializer, string $className)
-    {
-        $this->searchManager = $searchManager;
-        $this->serializer = $serializer;
-        $this->className = $className;
+    public function __construct(
+        private readonly SearchManager $searchManager,
+        private readonly SerializerInterface $serializer,
+        private readonly string $className
+    ) {
     }
 
     public function get(int $id, string $hydrateMode = self::HYDRATE_NONE): array
