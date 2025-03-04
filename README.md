@@ -1,4 +1,4 @@
-# ElasticsearchBundle
+# ElasticsearchBundle Version 3.2
 
 Elasticsearch integrates the official PHP-Elasticsearch Client (https://github.com/elastic/elasticsearch-php) into Symfony.
 The main idea is based on the [Specification pattern](https://en.wikipedia.org/wiki/Specification_pattern), while trying not to overengineer things.
