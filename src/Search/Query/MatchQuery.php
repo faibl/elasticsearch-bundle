@@ -4,15 +4,11 @@ namespace Faibl\ElasticsearchBundle\Search\Query;
 
 class MatchQuery implements QueryInterface
 {
-    private string $field;
-    private string $value;
-    private bool $zeroTermsQuery;
-
-    public function __construct(string $field, string $value, bool $zeroTermsQuery = true)
-    {
-        $this->field = $field;
-        $this->value = $value;
-        $this->zeroTermsQuery = $zeroTermsQuery ? 'all' : 'none';
+    public function __construct(
+        private readonly string $field,
+        private readonly string $value,
+        private readonly bool $zeroTermsQuery = true
+    ) {
     }
 
     public function getQuery(): array
@@ -21,9 +17,14 @@ class MatchQuery implements QueryInterface
             'match' => [
                 $this->field => [
                     'query' => $this->value,
-                    'zero_terms_query' => $this->zeroTermsQuery,
+                    'zero_terms_query' => $this->getZeroTermsQuery(),
                 ],
             ],
         ];
+    }
+
+    private function getZeroTermsQuery(): string
+    {
+        return $this->zeroTermsQuery ? 'all' : 'none';
     }
 }
