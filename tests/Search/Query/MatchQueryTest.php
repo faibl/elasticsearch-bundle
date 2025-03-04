@@ -2,10 +2,7 @@
 
 namespace Faibl\ElasticsearchBundle\Tests\Search\Query;
 
-use Faibl\ElasticsearchBundle\Search\Filter\DateGreaterThanFilter;
-use Faibl\ElasticsearchBundle\Search\Query\BoolQuery;
 use Faibl\ElasticsearchBundle\Search\Query\MatchQuery;
-use Faibl\ElasticsearchBundle\Search\Query\MultiMatchQuery;
 use PHPUnit\Framework\TestCase;
 
 class MatchQueryTest extends TestCase
